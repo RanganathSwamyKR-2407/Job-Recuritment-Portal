@@ -1,0 +1,6 @@
+{
+  "name": "HireStream - Modern Talent & Career Platform",
+  "description": "Enterprise-grade hiring and career discovery platform with real-time job exploration, multi-step application flow, candidate dashboard, and company directories.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
