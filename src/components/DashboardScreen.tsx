@@ -22,12 +22,21 @@ export const DashboardScreen: React.FC = () => {
     <main className="flex-grow pt-4 pb-16 px-4 md:px-12 max-w-[1280px] mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8">
       {/* Header Section (Full Width) */}
       <header className="col-span-12 mb-2">
-        <h1 className="text-[32px] md:text-[40px] font-bold font-geist text-[#091426] tracking-tight mb-1">
-          Welcome back, {candidate.firstName}!
-        </h1>
-        <p className="text-[16px] text-[#45474c]">
-          Here is a quick summary of your recent application activity and pipeline progress.
-        </p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h1 className="text-[32px] md:text-[40px] font-bold font-geist text-[#091426] tracking-tight mb-1">
+              Welcome back, {candidate.firstName} {candidate.lastName}!
+            </h1>
+            <p className="text-[16px] text-[#45474c]">
+              Here is a quick summary of your executive pipeline, active applications, and leadership opportunities.
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="px-3.5 py-1 bg-[#091426] text-white text-[13px] font-bold rounded-lg font-geist shadow-xs">
+              {candidate.title}
+            </span>
+          </div>
+        </div>
       </header>
 
       {/* Left Column (8 cols): Stats & Active Applications */}

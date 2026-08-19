@@ -101,7 +101,7 @@ export const Header: React.FC = () => {
                 {candidate.firstName.charAt(0)}
               </div>
               <span className="hidden sm:inline font-geist font-medium">
-                {candidate.firstName} {candidate.lastName.charAt(0)}.
+                {candidate.firstName} {candidate.lastName}
               </span>
               <span className="material-symbols-outlined text-[16px] opacity-70">
                 {profileDropdownOpen ? 'expand_less' : 'expand_more'}

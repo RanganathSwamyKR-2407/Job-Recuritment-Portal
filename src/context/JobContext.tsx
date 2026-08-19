@@ -93,10 +93,10 @@ const DEFAULT_FILTERS: FilterState = {
 const JobContext = createContext<JobContextType | undefined>(undefined);
 
 const STORAGE_KEYS = {
-  JOBS: 'hirestream_jobs_v1',
-  APPLICATIONS: 'hirestream_applications_v1',
-  SAVED: 'hirestream_saved_jobs_v1',
-  CANDIDATE: 'hirestream_candidate_v1'
+  JOBS: 'hirestream_jobs_v2',
+  APPLICATIONS: 'hirestream_applications_v2',
+  SAVED: 'hirestream_saved_jobs_v2',
+  CANDIDATE: 'hirestream_candidate_v2'
 };
 
 export const JobProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

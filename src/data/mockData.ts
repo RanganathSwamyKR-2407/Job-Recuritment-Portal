@@ -109,6 +109,47 @@ export const INITIAL_COMPANIES: Company[] = [
 
 export const INITIAL_JOBS: Job[] = [
   {
+    id: 'job-techflow-coo',
+    title: 'Chief Operating Officer (COO)',
+    companyId: 'techflow',
+    companyName: 'TechFlow',
+    companyLogo: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAR3BriCc6gp8OsSmJnw07vhylB3KgQbbJo30CQJm_WyXMRNAINMmn27BMlR8-MBS_0bdUr66n5h-wXcv5eAG4QGvJVv0VKj0hB58EFzEaLBRT5XDx1wuRp5bgz38H3zeawEF5Ky_o94FFlhcrhCD1qzM9ltEoZGKnYUrB7VB5s5jAjnG7jSHG94zI12qyXtrqO7NvxWFyLqJzB_7x-eCMuxkh-aSJf1LJFfikJVwEKp8t1UU26mGw',
+    location: 'San Francisco, CA',
+    workplaceType: 'Hybrid',
+    jobType: 'Full-time',
+    jobTypeDetails: 'Full-time, Executive',
+    department: 'Executive Leadership & Operations',
+    experienceLevel: 'Executive',
+    salaryMin: 220000,
+    salaryMax: 280000,
+    salaryDisplay: '$220,000 - $280,000',
+    postedDate: '2 days ago',
+    postedTimestamp: Date.now() - 2 * 86400000,
+    isFeatured: true,
+    tags: ['Full-time', 'Executive', 'Operations', 'Leadership'],
+    aboutRole: 'TechFlow is seeking an experienced Chief Operating Officer (COO) to lead global operational scale, cross-functional execution, enterprise logistics strategy, and high-performance team leadership. In this role, you will work directly alongside the CEO, Board of Directors, and department heads to steer the company through its next phase of hyper-growth.',
+    whatYoullDo: [
+      'Oversee day-to-day global operations, business performance, and key operational metrics.',
+      'Lead and align executive operations across Product, Engineering, Customer Success, and Revenue teams.',
+      'Scale operational frameworks, corporate governance, and multi-region business units.',
+      'Drive P&L optimization, budget allocation, and strategic growth initiatives.'
+    ],
+    whatWereLookingFor: [
+      '10+ years of executive leadership and business operations experience in high-growth technology or B2B SaaS.',
+      'Proven track record scaling organizations from growth stage to global market leadership.',
+      'Exceptional strategic planning, organizational design, and stakeholder communication capabilities.',
+      'Deep expertise in operational efficiency, process optimization, and executive decision making.'
+    ],
+    benefits: [
+      '$220,000 - $280,000 base salary + substantial executive equity package',
+      'Comprehensive medical, dental, and executive wellness coverage',
+      'Flexible hybrid schedule with executive travel allowance',
+      'Executive leadership development and board advisory support'
+    ],
+    applicantCount: 18,
+    responseSpeed: 'Typically responds within 2 days'
+  },
+  {
     id: 'job-techflow-spd',
     title: 'Senior Product Designer',
     companyId: 'techflow',
@@ -386,101 +427,110 @@ export const INITIAL_JOBS: Job[] = [
   }
 ];
 
-export const INITIAL_SAVED_JOB_IDS = ['job-creative-lead-ui', 'job-fintech-product-designer'];
+export const INITIAL_SAVED_JOB_IDS = ['job-techflow-coo', 'job-creative-lead-ui', 'job-fintech-product-designer'];
 
 export const INITIAL_APPLICATIONS: Application[] = [
   {
     id: 'app-techflow-001',
-    jobId: 'job-techflow-spd',
-    jobTitle: 'Senior Product Designer',
+    jobId: 'job-techflow-coo',
+    jobTitle: 'Chief Operating Officer (COO)',
     companyName: 'TechFlow',
     companyLogo: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAR3BriCc6gp8OsSmJnw07vhylB3KgQbbJo30CQJm_WyXMRNAINMmn27BMlR8-MBS_0bdUr66n5h-wXcv5eAG4QGvJVv0VKj0hB58EFzEaLBRT5XDx1wuRp5bgz38H3zeawEF5Ky_o94FFlhcrhCD1qzM9ltEoZGKnYUrB7VB5s5jAjnG7jSHG94zI12qyXtrqO7NvxWFyLqJzB_7x-eCMuxkh-aSJf1LJFfikJVwEKp8t1UU26mGw',
     location: 'San Francisco, CA',
     appliedDate: 'Applied Today',
     appliedTimestamp: Date.now() - 3600000 * 2,
     status: 'Interviewing',
-    candidateName: 'Jane Doe',
-    candidateEmail: 'jane.doe@example.com',
+    candidateName: 'Ranganath Swamy K R',
+    candidateEmail: 'ranganath.swamy@example.com',
     candidatePhone: '+1 (555) 019-2834',
-    resumeFileName: 'Jane_Doe_Product_Design_Resume.pdf',
+    resumeFileName: 'Ranganath_Swamy_KR_COO_Executive_Resume.pdf',
     resumeFileSize: '2.4 MB',
-    linkedInUrl: 'https://linkedin.com/in/janedoe',
-    portfolioUrl: 'https://janedoe.design',
-    coverNote: 'Excited to bring my 6 years of enterprise SaaS experience and systems thinking to TechFlow supply chain workflows.',
+    linkedInUrl: 'https://linkedin.com/in/ranganathswamykr',
+    portfolioUrl: 'https://ranganathswamykr.com',
+    coverNote: 'Excited to bring my 15+ years of executive operations, P&L management, scaling tech organizations, and global logistics execution to TechFlow.',
     timeline: [
       {
         stage: 'Application Received',
-        description: 'We have your resume and portfolio.',
+        description: 'We have your executive resume and leadership dossier.',
         completed: true,
         date: 'Today, 9:15 AM'
       },
       {
         stage: 'Initial Review',
-        description: 'The hiring manager will review your materials.',
+        description: 'The Board & CEO have completed executive screening.',
         completed: true,
         date: 'Today, 2:30 PM'
       },
       {
         stage: 'Interview Scheduling',
-        description: 'If selected, we\'ll reach out to schedule a call.',
+        description: 'Executive Panel & Founder Discussion scheduled.',
         completed: true,
         date: 'Scheduled for Tomorrow, 3:00 PM PST'
       }
     ],
-    interviewDate: 'Tomorrow at 3:00 PM PST (Zoom Video)',
-    recruiterNotes: 'Hiring manager Marcus Vance was impressed by your design systems case study. Ready for round 1 chat.'
+    interviewDate: 'Tomorrow at 3:00 PM PST (Executive Zoom Boardroom)',
+    recruiterNotes: 'CEO and Search Committee were exceptionally impressed by your COO track record in scaling B2B enterprise operations. Ready for round 1 executive chat.'
   },
   {
     id: 'app-innovate-002',
     jobId: 'job-innovate-uxr',
-    jobTitle: 'UX Researcher',
+    jobTitle: 'VP of Operations / Executive Advisor',
     companyName: 'Innovate Inc.',
     companyLogo: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAR3BriCc6gp8OsSmJnw07vhylB3KgQbbJo30CQJm_WyXMRNAINMmn27BMlR8-MBS_0bdUr66n5h-wXcv5eAG4QGvJVv0VKj0hB58EFzEaLBRT5XDx1wuRp5bgz38H3zeawEF5Ky_o94FFlhcrhCD1qzM9ltEoZGKnYUrB7VB5s5jAjnG7jSHG94zI12qyXtrqO7NvxWFyLqJzB_7x-eCMuxkh-aSJf1LJFfikJVwEKp8t1UU26mGw',
     location: 'Remote',
     appliedDate: '3 days ago',
     appliedTimestamp: Date.now() - 86400000 * 3,
     status: 'Under Review',
-    candidateName: 'Jane Doe',
-    candidateEmail: 'jane.doe@example.com',
+    candidateName: 'Ranganath Swamy K R',
+    candidateEmail: 'ranganath.swamy@example.com',
     candidatePhone: '+1 (555) 019-2834',
-    resumeFileName: 'Jane_Doe_Product_Design_Resume.pdf',
+    resumeFileName: 'Ranganath_Swamy_KR_COO_Executive_Resume.pdf',
     resumeFileSize: '2.4 MB',
-    linkedInUrl: 'https://linkedin.com/in/janedoe',
-    portfolioUrl: 'https://janedoe.design',
-    coverNote: 'Passionate about mixed-methods user research and transforming qualitative insights into actionable roadmaps.',
+    linkedInUrl: 'https://linkedin.com/in/ranganathswamykr',
+    portfolioUrl: 'https://ranganathswamykr.com',
+    coverNote: 'Passionate about executive organizational design, cross-functional synergy, and transforming operational strategy into compounding revenue.',
     timeline: [
       {
         stage: 'Application Received',
-        description: 'We have your resume and portfolio.',
+        description: 'We have your executive profile.',
         completed: true,
         date: '3 days ago'
       },
       {
         stage: 'Initial Review',
-        description: 'The talent acquisition team is actively reviewing your submission.',
+        description: 'The Executive Search team is actively reviewing your dossier.',
         completed: false
       },
       {
         stage: 'Interview Scheduling',
-        description: 'Interview invitations sent to shortlisted candidates.',
+        description: 'Executive rounds sent to shortlisted leadership candidates.',
         completed: false
       }
     ],
-    recruiterNotes: 'Application passed preliminary screening. Portfolio under review by Head of UX Research.'
+    recruiterNotes: 'Application passed preliminary executive screening. Under active review with Managing Partner.'
   }
 ];
 
 export const INITIAL_CANDIDATE: CandidateProfile = {
-  firstName: 'Jane',
-  lastName: 'Doe',
-  email: 'jane.doe@example.com',
-  phone: '+1 (555) 000-0000',
-  title: 'Senior Product Designer',
-  location: 'San Francisco, CA',
-  linkedInUrl: 'https://linkedin.com/in/janedoe',
-  portfolioUrl: 'https://janedoe.design',
-  bio: 'Product Designer with 6+ years creating scalable enterprise B2B software and elegant consumer apps.',
-  resumeName: 'Jane_Doe_Product_Design_Resume.pdf',
+  firstName: 'Ranganath Swamy',
+  lastName: 'K R',
+  email: 'ranganath.swamy@example.com',
+  phone: '+1 (555) 019-2834',
+  title: 'Chief Operating Officer (COO)',
+  location: 'San Francisco, CA & Remote',
+  linkedInUrl: 'https://linkedin.com/in/ranganathswamykr',
+  portfolioUrl: 'https://ranganathswamykr.com',
+  bio: 'Chief Operating Officer (COO) with 15+ years of experience leading global business operations, executive strategy, scaling hyper-growth tech enterprises, and operational excellence.',
+  resumeName: 'Ranganath_Swamy_KR_COO_Executive_Resume.pdf',
   resumeSize: '2.4 MB',
-  skills: ['Figma', 'Design Systems', 'Enterprise UX', 'React/CSS', 'User Research', 'Prototyping', 'Accessibility']
+  skills: [
+    'Executive Leadership',
+    'Chief Operating Officer (COO)',
+    'Global Business Operations',
+    'P&L Management',
+    'Scaling Organizations',
+    'Cross-Functional Strategy',
+    'Corporate Governance',
+    'Enterprise SaaS'
+  ]
 };

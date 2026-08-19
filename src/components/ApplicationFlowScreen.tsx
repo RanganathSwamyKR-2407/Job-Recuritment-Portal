@@ -15,7 +15,7 @@ export const ApplicationFlowScreen: React.FC = () => {
 
   // Step 2 Fields
   const [resumeFile, setResumeFile] = useState<{ name: string; size: string } | null>({
-    name: candidate.resumeName || 'Jane_Doe_Product_Design_Resume.pdf',
+    name: candidate.resumeName || 'Ranganath_Swamy_KR_COO_Executive_Resume.pdf',
     size: candidate.resumeSize || '2.4 MB'
   });
   const [isDragging, setIsDragging] = useState(false);
@@ -308,7 +308,7 @@ export const ApplicationFlowScreen: React.FC = () => {
                       type="text"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
-                      placeholder="Jane"
+                      placeholder="Ranganath Swamy"
                       className={`w-full bg-white text-[#0b1c30] border rounded-lg px-3.5 py-2 text-[14px] focus:outline-none focus:ring-2 transition-all ${
                         errors.firstName
                           ? 'border-red-500 focus:ring-red-200'
@@ -328,7 +328,7 @@ export const ApplicationFlowScreen: React.FC = () => {
                       type="text"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
-                      placeholder="Doe"
+                      placeholder="K R"
                       className={`w-full bg-white text-[#0b1c30] border rounded-lg px-3.5 py-2 text-[14px] focus:outline-none focus:ring-2 transition-all ${
                         errors.lastName
                           ? 'border-red-500 focus:ring-red-200'
@@ -353,7 +353,7 @@ export const ApplicationFlowScreen: React.FC = () => {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="jane.doe@example.com"
+                      placeholder="ranganath.swamy@example.com"
                       className={`w-full bg-white text-[#0b1c30] border rounded-lg pl-10 pr-3.5 py-2 text-[14px] focus:outline-none focus:ring-2 transition-all ${
                         errors.email
                           ? 'border-red-500 focus:ring-red-200'
