@@ -1,0 +1,141 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 1. Global Default-Deny Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Bootstrapped COO / Administrator check
+    function isCOOOrAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'nikhilshanmukhappa@gmail.com' ||
+        request.auth.token.email == 'ranganath.swamy@example.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Validation helper for UserProfile
+    function isValidUserProfile(data) {
+      return data.userId is string && data.userId.size() <= 128 &&
+             data.userId == request.auth.uid &&
+             data.email is string && data.email.size() <= 255 &&
+             data.firstName is string && data.firstName.size() <= 100 &&
+             data.lastName is string && data.lastName.size() <= 100 &&
+             (!('title' in data) || (data.title is string && data.title.size() <= 150)) &&
+             (!('phone' in data) || (data.phone is string && data.phone.size() <= 50)) &&
+             (!('location' in data) || (data.location is string && data.location.size() <= 150)) &&
+             (!('bio' in data) || (data.bio is string && data.bio.size() <= 1000));
+    }
+
+    // Validation helper for SignedInUser directory
+    function isValidSignedInUser(data) {
+      return data.userId is string && data.userId.size() <= 128 &&
+             data.userId == request.auth.uid &&
+             data.email is string && data.email.size() <= 255 &&
+             data.displayName is string && data.displayName.size() <= 200 &&
+             (!('title' in data) || (data.title is string && data.title.size() <= 150)) &&
+             (!('status' in data) || (data.status is string && data.status.size() <= 50));
+    }
+
+    // Validation helper for Job
+    function isValidJob(data) {
+      return data.id is string && data.id.size() <= 128 &&
+             data.title is string && data.title.size() > 0 && data.title.size() <= 200 &&
+             data.companyName is string && data.companyName.size() > 0 && data.companyName.size() <= 200 &&
+             data.location is string && data.location.size() <= 200 &&
+             data.jobType is string && data.jobType.size() <= 50 &&
+             (!('salaryDisplay' in data) || (data.salaryDisplay is string && data.salaryDisplay.size() <= 100)) &&
+             (!('aboutRole' in data) || (data.aboutRole is string && data.aboutRole.size() <= 4000));
+    }
+
+    // Validation helper for Application
+    function isValidApplication(data) {
+      return data.id is string && data.id.size() <= 128 &&
+             data.userId is string && data.userId == request.auth.uid &&
+             data.jobId is string && data.jobId.size() <= 128 &&
+             data.jobTitle is string && data.jobTitle.size() <= 200 &&
+             data.companyName is string && data.companyName.size() <= 200 &&
+             data.candidateName is string && data.candidateName.size() <= 200 &&
+             data.candidateEmail is string && data.candidateEmail.size() <= 255 &&
+             (!('coverNote' in data) || (data.coverNote is string && data.coverNote.size() <= 2000)) &&
+             (!('resumeFileName' in data) || (data.resumeFileName is string && data.resumeFileName.size() <= 255));
+    }
+
+    // Validation helper for SavedJob
+    function isValidSavedJob(data) {
+      return data.userId is string && data.userId == request.auth.uid &&
+             data.jobId is string && data.jobId.size() <= 128;
+    }
+
+    // Signed-in users directory for COO monitoring
+    match /signed_in_users/{userId} {
+      allow get, list: if isSignedIn();
+      allow create: if isOwner(userId) && isValidSignedInUser(incoming());
+      allow update: if isOwner(userId) && isValidSignedInUser(incoming());
+      allow delete: if isOwner(userId) || isCOOOrAdmin();
+    }
+
+    // User Profiles Collection
+    match /user_profiles/{userId} {
+      allow get: if isOwner(userId) || isCOOOrAdmin();
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isCOOOrAdmin());
+      allow create: if isOwner(userId) && isValidUserProfile(incoming());
+      allow update: if isOwner(userId) && isValidUserProfile(incoming()) && incoming().userId == existing().userId;
+      allow delete: if isOwner(userId) || isCOOOrAdmin();
+    }
+
+    // Jobs Collection (Public discovery, authenticated posting)
+    match /jobs/{jobId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isSignedIn() && isValidId(jobId) && isValidJob(incoming());
+      allow update: if isSignedIn() && isValidId(jobId) && isValidJob(incoming());
+      allow delete: if isSignedIn() && isValidId(jobId);
+    }
+
+    // Applications Collection (Candidate privacy isolation + COO overview)
+    match /applications/{applicationId} {
+      allow get: if isSignedIn() && isValidId(applicationId) && (resource.data.userId == request.auth.uid || isCOOOrAdmin());
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isCOOOrAdmin());
+      allow create: if isSignedIn() && isValidId(applicationId) && isValidApplication(incoming());
+      allow update: if isSignedIn() && isValidId(applicationId) && (resource.data.userId == request.auth.uid || isCOOOrAdmin()) && isValidApplication(incoming());
+      allow delete: if isSignedIn() && isValidId(applicationId) && (resource.data.userId == request.auth.uid || isCOOOrAdmin());
+    }
+
+    // Saved Jobs Collection
+    match /saved_jobs/{savedJobDocId} {
+      allow get, delete: if isSignedIn() && isValidId(savedJobDocId) && resource.data.userId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(savedJobDocId) && isValidSavedJob(incoming());
+    }
+
+    // System Health probe path
+    match /system_health/{probeId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Registered candidate or recruiter profile information",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128, "description": "Unique Firebase Authentication UID" },
+        "firstName": { "type": "string", "maxLength": 100, "description": "User first name" },
+        "lastName": { "type": "string", "maxLength": 100, "description": "User last name" },
+        "email": { "type": "string", "maxLength": 255, "description": "User email address" },
+        "phone": { "type": "string", "maxLength": 50, "description": "Contact phone number" },
+        "title": { "type": "string", "maxLength": 150, "description": "Professional executive or job title" },
+        "location": { "type": "string", "maxLength": 150, "description": "Location or region" },
+        "bio": { "type": "string", "maxLength": 1000, "description": "Professional summary or bio" },
+        "linkedInUrl": { "type": "string", "maxLength": 255, "description": "LinkedIn profile URL" },
+        "portfolioUrl": { "type": "string", "maxLength": 255, "description": "Portfolio or personal site" },
+        "skills": { "type": "array", "description": "Key skills and competencies" },
+        "updatedAt": { "type": "string", "description": "Server timestamp of last update" }
+      },
+      "required": ["userId", "email", "firstName", "lastName"]
+    },
+    "SignedInUser": {
+      "title": "SignedInUser",
+      "description": "Real-time user session and identity record visible to COO and executives",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128, "description": "Unique user UID" },
+        "displayName": { "type": "string", "maxLength": 200, "description": "Full display name" },
+        "email": { "type": "string", "maxLength": 255, "description": "User email address" },
+        "photoURL": { "type": "string", "maxLength": 1000, "description": "Avatar photo URL" },
+        "title": { "type": "string", "maxLength": 150, "description": "Role or Candidate Title" },
+        "status": { "type": "string", "maxLength": 50, "description": "Online, Active Now, Idle" },
+        "lastLoginAt": { "type": "number", "description": "Last sign in timestamp" },
+        "lastActiveDisplay": { "type": "string", "maxLength": 100, "description": "Formatted last active time" },
+        "provider": { "type": "string", "maxLength": 50, "description": "Auth provider (e.g. google.com)" },
+        "appliedJobsCount": { "type": "number", "description": "Total jobs applied for" },
+        "isCOO": { "type": "boolean", "description": "Whether user has COO executive privileges" }
+      },
+      "required": ["userId", "email", "displayName"]
+    },
+    "Job": {
+      "title": "Job",
+      "description": "Job listing posted on HireStream",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "description": "Job ID" },
+        "title": { "type": "string", "maxLength": 200, "description": "Position title" },
+        "companyId": { "type": "string", "maxLength": 128, "description": "Company identifier" },
+        "companyName": { "type": "string", "maxLength": 200, "description": "Company name" },
+        "companyLogo": { "type": "string", "maxLength": 1000, "description": "Logo URL" },
+        "location": { "type": "string", "maxLength": 200, "description": "Workplace location" },
+        "workplaceType": { "type": "string", "maxLength": 50, "description": "Hybrid, Remote, or On-site" },
+        "jobType": { "type": "string", "maxLength": 50, "description": "Employment type" },
+        "department": { "type": "string", "maxLength": 150, "description": "Department name" },
+        "salaryDisplay": { "type": "string", "maxLength": 100, "description": "Display salary range" },
+        "salaryMin": { "type": "number", "description": "Minimum annual salary in USD" },
+        "salaryMax": { "type": "number", "description": "Maximum annual salary in USD" },
+        "postedBy": { "type": "string", "maxLength": 128, "description": "Author UID" },
+        "aboutRole": { "type": "string", "maxLength": 3000, "description": "Detailed role description" },
+        "tags": { "type": "array", "description": "Categorization tags" }
+      },
+      "required": ["id", "title", "companyName", "location", "jobType"]
+    },
+    "Application": {
+      "title": "Application",
+      "description": "Job application submitted by candidate",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "description": "Application record ID" },
+        "userId": { "type": "string", "maxLength": 128, "description": "Applicant UID" },
+        "jobId": { "type": "string", "maxLength": 128, "description": "Referenced Job ID" },
+        "jobTitle": { "type": "string", "maxLength": 200, "description": "Job Title" },
+        "companyName": { "type": "string", "maxLength": 200, "description": "Company Name" },
+        "candidateName": { "type": "string", "maxLength": 200, "description": "Full candidate name" },
+        "candidateEmail": { "type": "string", "maxLength": 255, "description": "Applicant email" },
+        "candidatePhone": { "type": "string", "maxLength": 50, "description": "Phone number" },
+        "resumeFileName": { "type": "string", "maxLength": 255, "description": "Resume filename" },
+        "resumeFileSize": { "type": "string", "maxLength": 50, "description": "Resume size string" },
+        "status": { "type": "string", "maxLength": 50, "description": "Application review status" },
+        "coverNote": { "type": "string", "maxLength": 2000, "description": "Candidate cover note" },
+        "appliedDate": { "type": "string", "maxLength": 100, "description": "Human-readable applied date" },
+        "appliedTimestamp": { "type": "number", "description": "Application submission epoch timestamp" }
+      },
+      "required": ["id", "userId", "jobId", "jobTitle", "companyName", "candidateName", "candidateEmail"]
+    },
+    "SavedJob": {
+      "title": "SavedJob",
+      "description": "Bookmarked job reference for candidate dashboard",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128, "description": "User UID" },
+        "jobId": { "type": "string", "maxLength": 128, "description": "Job ID" },
+        "savedAt": { "type": "number", "description": "Timestamp when saved" }
+      },
+      "required": ["userId", "jobId"]
+    }
+  },
+  "firestore": {
+    "/signed_in_users/{userId}": {
+      "schema": "SignedInUser",
+      "description": "Directory of signed in users and active sessions visible to COO executive portal"
+    },
+    "/user_profiles/{userId}": {
+      "schema": "UserProfile",
+      "description": "Private user profiles accessible by their owner or COO administrator"
+    },
+    "/jobs/{jobId}": {
+      "schema": "Job",
+      "description": "Public job listings readable by all users and writable by recruiters"
+    },
+    "/applications/{applicationId}": {
+      "schema": "Application",
+      "description": "Job applications readable by candidate and COO administrator"
+    },
+    "/saved_jobs/{savedJobDocId}": {
+      "schema": "SavedJob",
+      "description": "Saved job bookmarks for a user"
+    }
+  }
+}

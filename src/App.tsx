@@ -1,4 +1,5 @@
 import React from 'react';
+import { AuthProvider } from './context/AuthContext';
 import { JobProvider, useJobContext } from './context/JobContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -12,6 +13,9 @@ import { CompanyDetailScreen } from './components/CompanyDetailScreen';
 import { ApplicationDetailModal } from './components/ApplicationDetailModal';
 import { PostJobModal } from './components/PostJobModal';
 import { ToastContainer } from './components/ToastContainer';
+import { AuthModal } from './components/AuthModal';
+import { CooConsoleModal } from './components/CooConsoleModal';
+import { PortalLinksModal } from './components/PortalLinksModal';
 
 const MainApp: React.FC = () => {
   const { currentScreen } = useJobContext();
@@ -41,6 +45,9 @@ const MainApp: React.FC = () => {
       {/* Modals & Overlays */}
       <ApplicationDetailModal />
       <PostJobModal />
+      <AuthModal />
+      <CooConsoleModal />
+      <PortalLinksModal />
       <ToastContainer />
     </div>
   );
@@ -48,8 +55,10 @@ const MainApp: React.FC = () => {
 
 export default function App() {
   return (
-    <JobProvider>
-      <MainApp />
-    </JobProvider>
+    <AuthProvider>
+      <JobProvider>
+        <MainApp />
+      </JobProvider>
+    </AuthProvider>
   );
 }

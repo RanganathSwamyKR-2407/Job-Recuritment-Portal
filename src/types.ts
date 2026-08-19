@@ -49,6 +49,7 @@ export type ApplicationStatus = 'Applied' | 'Under Review' | 'Interviewing' | 'T
 
 export interface Application {
   id: string;
+  userId?: string;
   jobId: string;
   jobTitle: string;
   companyName: string;
@@ -88,6 +89,22 @@ export interface CandidateProfile {
   resumeName?: string;
   resumeSize?: string;
   skills: string[];
+}
+
+export interface SignedInUserRecord {
+  userId: string;
+  displayName: string;
+  email: string;
+  photoURL?: string;
+  title: string;
+  status: 'Active Now' | 'Online' | 'Idle' | 'Just Joined';
+  lastLoginAt: number;
+  lastActiveDisplay: string;
+  provider: string;
+  appliedJobsCount?: number;
+  appliedRoles?: string[];
+  isCOO?: boolean;
+  location?: string;
 }
 
 export interface FilterState {

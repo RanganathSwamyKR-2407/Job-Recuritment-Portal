@@ -70,12 +70,12 @@ export const ApplicationFlowScreen: React.FC = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      const newApp = submitApplication({
-        jobId: selectedJob?.id || 'job-techflow-spd',
+    try {
+      const newApp = await submitApplication({
+        jobId: selectedJob?.id || 'job-techflow-coo',
         firstName,
         lastName,
         email,
@@ -100,7 +100,10 @@ export const ApplicationFlowScreen: React.FC = () => {
 
       setIsSubmitting(false);
       navigateToSuccess(newApp);
-    }, 600);
+    } catch (err) {
+      console.error('Submit error:', err);
+      setIsSubmitting(false);
+    }
   };
 
   const progressLineWidth = currentStep === 1 ? '0%' : currentStep === 2 ? '50%' : '100%';
